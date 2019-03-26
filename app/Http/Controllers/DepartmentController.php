@@ -12,11 +12,18 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
+        $i = 1;
         $departments = Department::all();
 
-        return view ('department.index',compact('departments'));
+        return view ('department.index',compact('departments','i'));
     }
 
     /**

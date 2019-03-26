@@ -4,12 +4,20 @@
 @include('layouts.header')
 
 <body>
-@include('layouts.navbar')
+<div id="page-loader" class="show">
+</div>
+<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed">
+@include('layouts.sidebar')
+ @include('layouts.navbar')
 
-@yield('content')
+    <main id="main-container">
 
 
+    @yield('content')
 
 
+</main>
+    @include('layouts.footer')
+</div>
 </body>
 </html>

@@ -11,13 +11,21 @@ class ItemController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
-
+        $i = 1;
         $items = Item::all();
 
-        return view ('item.index',compact('items'));
+        return view ('item.index',compact('items','i'));
     }
 
     /**
@@ -81,7 +89,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        $item->update($request->all());
+        $item->update($request->only(['name']));
 
         session()->flash('message','Item updated successfully');
 

@@ -12,7 +12,7 @@ use App\Exports\AssetExport;
 use App\Exports\ScrapExport;
 use Carbon\Carbon;
 use Validator;
-
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 
@@ -24,6 +24,11 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -73,7 +78,17 @@ class AssetController extends Controller
                 $asset->department_id = $request->department_id;
                 $asset->model = $request->model[$a];
                 $asset->serial_number = $request->serial_number[$a];
+                $asset->qrcode =$request->asset_user[$a].".png";
+
+                    QrCode::format('png')
+                    ->merge('img/grand.png', .1, true)
+                    ->size(200)->errorCorrection('H')
+                    ->generate('https://invapp.test/scan/'.$request->serial_number[$a],'../public/qrcodes/'.$request->asset_user[$a].".png");
+
                 $asset->save();
+
+
+
             }
 
 
@@ -103,9 +118,9 @@ class AssetController extends Controller
     {
       // return $asset->department->id;
 
-        $item = Item::where('id', '!=',$asset->Item->id)->get();
-       $department = Department::Where('id','!=',$asset->Department->id)->get();
-        return view('asset.edit',['asset' => $asset,'item' => $item,'department' => $department]);
+        $items = Item::where('id', '!=',$asset->Item->id)->get();
+       $departments = Department::Where('id','!=',$asset->Department->id)->get();
+        return view('asset.edit',['asset' => $asset,'items' => $items,'departments' => $departments]);
     }
 
     /**
@@ -119,21 +134,9 @@ class AssetController extends Controller
     {
 
       //  dd($request->all());
-        $asset->update($request->only(['asset_user','department_id']));
+        $asset->update($request->all());
 
-        $transfer = new transfer();
-
-        $transfer->identification_number = $request->identification_no;
-        $transfer->asset_category = $request->category;
-        $transfer->previous_user = $request->pu;
-        $transfer->current_user = $request->asset_user;
-        $transfer->previous_department = $request->pd;
-        $transfer->department_id = $request->department_id;
-        $transfer->created_at = carbon::now('Africa/Lagos');
-        $transfer->updated_at = carbon::now('Africa/Lagos');
-         $transfer->save();
-
-        session()->flash('message','Asset transfer successful');
+        session()->flash('message','Asset successful updated');
         return redirect()->route('asset.index');
     }
 

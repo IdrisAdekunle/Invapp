@@ -1,22 +1,32 @@
 
-<div id="DeleteModal{{$asset->id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel"> Confirm delete</h3>
-    </div>
-    <div class="modal-body">
-        <p>Are you sure you want to delete {{$asset->identification_no}} ?</p>
 
-
-        <div class="modal-footer">
-            <form method="post" action="{{route('asset.destroy',$asset->id)}}" >
-                {{ method_field('DELETE') }}
-                {{csrf_field()}}
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                <button class="btn btn-primary">Delete</button>
-            </form>
-
+<!-- Slide Left Block Modal -->
+<div class="modal fade" id="modal-block-slideleft{{$asset->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-slideleft" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-slideleft" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">Confirm Delete</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content font-size-sm">
+                    <p>Are you sure you want to delete {{$asset->identification_no}} ?</p>
+                </div>
+                <div class="block-content block-content-full text-right border-top">
+                    <form method="post" action="{{route('asset.destroy',$asset->sap_no)}}" id="delete-form{{$asset->id}}" >
+                        {{ method_field('DELETE') }}
+                        {{csrf_field()}}
+                        <button type="button" class="btn btn-sm btn-light" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="event.preventDefault();
+                                document.getElementById('delete-form{{$asset->id}}').submit();"><i class="fa fa-check mr-1"></i>Delete</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
+<!-- END Slide Left Block Modal -->

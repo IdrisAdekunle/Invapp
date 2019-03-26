@@ -1,6 +1,5 @@
 @if($flash = session('message'))
-<div class="alert alert-success" style="position: absolute;margin-left: 80% ">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+<div class="alert alert-success" style="margin-left: 50% ;width:38% ">
     <strong>{{$flash}}</strong>
 </div>
 

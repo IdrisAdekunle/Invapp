@@ -21,6 +21,7 @@ class CreateTransfersTable extends Migration
             $table->string('current_user');
             $table->string('previous_department');
             $table->string('department_id');
+            $table->text('justification');
             $table->timestamps();
         });
     }
