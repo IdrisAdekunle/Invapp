@@ -1,186 +1,68 @@
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-                        class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </a><a class="brand" href="{{route('welcome')}}">INFORMATION TECHNOLOGY INVENTORY FORM </a>
-            <div class="nav-collapse">
-                <ul class="nav pull-right">
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                                    class="icon-cog"></i> Account <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:;">Settings</a></li>
-                            <li><a href="javascript:;">Help</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                                    class="icon-user"></i> Admin <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:;">Profile</a></li>
-                            <li><a href="javascript:;">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="navbar-search pull-right">
-                    <input type="text" class="search-query" placeholder="Search">
-                </form>
+<!-- Header -->
+<header id="page-header">
+    <!-- Header Content -->
+    <div class="content-header">
+        <!-- Left Section -->
+        <div class="d-flex align-items-center">
+            <!-- Toggle Sidebar -->
+            <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+            <button type="button" class="btn btn-sm btn-dual mr-2 d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                <i class="fa fa-fw fa-bars"></i>
+            </button>
+            <!-- END Toggle Sidebar -->
+
+            <!-- Toggle Mini Sidebar -->
+            <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
+            <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
+                <i class="fa fa-fw fa-ellipsis-v"></i>
+            </button>
+            <!-- END Toggle Mini Sidebar -->
+
+            <!-- Apps Modal -->
+            <!-- Opens the Apps modal found at the bottom of the page, after footer’s markup -->
+
+            <!-- END Apps Modal -->
+
+        </div>
+        <!-- END Left Section -->
+
+        <!-- Right Section -->
+        <div class="d-flex align-items-center">
+            <!-- User Dropdown -->
+            <div class="dropdown d-inline-block ml-2">
+                <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded" src="{{asset('assets/media/avatars/avatar10.jpg')}}" alt="Header Avatar" style="width: 18px;">
+                    <span class="d-none d-sm-inline-block ml-1">{{auth()->user()->name}}</span>
+                    <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
+                    <div class="p-3 text-center bg-primary">
+                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{asset('assets/media/avatars/avatar10.jpg')}}" alt="">
+                    </div>
+                    <div class="p-2">
+
+                        <h5 class="dropdown-header text-uppercase">Actions</h5>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                <i class="si si-logout ml-1"></i> {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                    </div>
+                </div>
             </div>
-            <!--/.nav-collapse -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /navbar-inner -->
-</div>
-<!-- /navbar -->
-<div class="subnavbar">
-    <div class="subnavbar-inner">
-        <div class="container">
-            <ul class="mainnav">
-
-                @if(Route::CurrentRouteName() == 'welcome')
-
-                    <li class="active"><a href="{{route('welcome')}}"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-                @elseif(Route::CurrentRouteName() == '/')
-
-                    <li class="active"><a href="{{route('welcome')}}"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-
-                    @else
-
-                    <li class=""><a href="{{route('welcome')}}"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-
-                @endif
-                @if(Route::CurrentRouteName() == 'item.create')
-                <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-book"></i><span>Item</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('item.create')}}">Create item</a></li>
-                        <li><a href="{{route('item.index')}}">Item Categories</a></li>
-
-                    </ul>
-                </li>
-                @elseif(Route::CurrentRouteName() == 'item.index')
-
-
-                    <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-book"></i><span>Item</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{route('item.create')}}">Create item</a></li>
-                            <li><a href="{{route('item.index')}}">Item Categories</a></li>
-
-                        </ul>
-                    </li>
-
-
-                    @else
-
-                    <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-book"></i><span>Item</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{route('item.create')}}">Create item</a></li>
-                            <li><a href="{{route('item.index')}}">Item Categories</a></li>
-
-                        </ul>
-                    </li>
-
-                    @endif
-
-                    @if(Route::CurrentRouteName() == 'department.create')
-                <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-group"></i><span>Department</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('department.create')}}">Create department</a></li>
-                        <li><a href="{{route('department.index')}}">Departments</a></li>
-
-                    </ul>
-                </li>
-
-                    @elseif(Route::CurrentRouteName() == 'department.index')
-
-                        <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-group"></i><span>Department</span> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{route('department.create')}}">Create department</a></li>
-                                <li><a href="{{route('department.index')}}">Departments</a></li>
-
-                            </ul>
-                        </li>
-
-                        @else
-
-                        <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-group"></i><span>Department</span> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{route('department.create')}}">Create department</a></li>
-                                <li><a href="{{route('department.index')}}">Departments</a></li>
-
-                            </ul>
-                        </li>
-
-                        @endif
-                    @if(Route::CurrentRouteName() == 'asset.create')
-                <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-hdd"></i><span>Asset</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('asset.create')}}">Upload assets</a></li>
-                        <li><a href="{{route('asset.index')}}">Assets</a></li>
-
-                    </ul>
-                </li>
-
-            @elseif(Route::CurrentRouteName() == 'asset.index')
-
-                <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-hdd"></i><span>Asset</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('asset.create')}}">Upload assets</a></li>
-                        <li><a href="{{route('asset.index')}}">Assets</a></li>
-
-                    </ul>
-                </li>
-
-
-
-
-            @elseif(Route::CurrentRouteName() == 'asset.edit')
-                <li class="active dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-hdd"></i><span>Asset</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('asset.create')}}">Upload assets</a></li>
-                        <li><a href="{{route('asset.index')}}">Assets</a></li>
-
-                    </ul>
-                </li>
-
-
-
-            @else
-
-                <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-hdd"></i><span>Asset</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('asset.create')}}">Upload assets</a></li>
-                        <li><a href="{{route('asset.index')}}">Assets</a></li>
-
-                    </ul>
-                </li>
-
-                    @endif
-
-                        @if(Route::CurrentRouteName() == 'scrapped')
-
-                        <li class="active"><a href="{{url('/scrapped_assets')}}"><i class="icon-trash"></i><span>Scrapped Assets</span> </a> </li>
-
-                    @else
-
-                        <li class=""><a href="{{url('/scrapped_assets')}}"><i class="icon-trash"></i><span>Scrapped Assets</span> </a> </li>
-
-                    @endif
-
-                    @if(Route::CurrentRouteName() == 'transfer.index')
-
-                        <li class="active"><a href="{{url('/transfer')}}"><i class="icon-copy"></i><span>Transfers</span> </a> </li>
-
-                    @else
-
-                        <li class=""><a href="{{url('/transfer')}}"><i class="icon-copy"></i><span>Transfers</span> </a> </li>
-
-                    @endif
-                </ul>
-
-
-
+            <!-- END User Dropdown -->
 
 
         </div>
-        <!-- /container -->
+        <!-- END Right Section -->
     </div>
-    <!-- /subnavbar-inner -->
-</div>
+    <!-- END Header Content -->
+
+
+    <!-- Header Loader -->
+
+</header>

@@ -9,6 +9,12 @@ use App\Department;
 
 class DashboardController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
 
 
@@ -19,7 +25,7 @@ class DashboardController extends Controller
         $items = Item::all();
         $departments = Department::all();
 
-        return view ('welcome',compact('department_count','total_asset_count','items','departments','scrap_count','current_asset_count'));
+        return view ('home',compact('department_count','total_asset_count','items','departments','scrap_count','current_asset_count'));
 
     }
 }

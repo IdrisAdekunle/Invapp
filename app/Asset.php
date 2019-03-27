@@ -16,7 +16,8 @@ class Asset extends Model
         'department_id',
         'model',
         'serial_number',
-        'scrap'
+        'scrap',
+        'qrcode'
     ];
 
     public function scopeGenerateID()

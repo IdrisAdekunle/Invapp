@@ -3,132 +3,184 @@
 @section('content')
 
 
-    <div class="main-inner">
-
-        <div class="container">
-
-            <div class="row">
-
-                <div class="span12">
-
-                    <div class="widget ">
-
-                        <div class="widget-header">
-                            <i class="icon-copy"></i>
-                            <h3>Transfer Asset</h3>
-                        </div> <!-- /widget-header -->
-
-                        <div class="widget-content">
-                            <form method="post" action="{{route('asset.update',$asset->sap_no)}}" >
-
-                                {{ method_field('PUT') }}
-
-                                {{csrf_field()}}
-                                <fieldset>
-
-                                    <div class="control-group">
-                                        <label class="control-label" for="name">Identification number</label>
-                                        <div class="controls">
-                                            <input type="text" class="span6" name="identification_no" value="{{$asset->identification_no}}" disabled>
-                                            <input type="hidden"  name="identification_no" value="{{$asset->identification_no}}">
-                                        </div> <!-- /controls -->
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label" for="name">Asset sap number</label>
-                                        <div class="controls">
-                                            <input type="text" class="span6" name="sap_no" value="{{$asset->sap_no}}" disabled>
-                                        </div> <!-- /controls -->
-                                    </div>
-
-                                    <div class="control-group">
-
-                                        <label class="control-label" for="name">Item category</label>
-                                        <div class="controls">
-                                            <input type="text" class="span6" name="category" value="{{$asset->item->name}}" disabled>
-                                        </div> <!-- /controls -->
-                                        <input type="hidden" class="span6" name="category" value="{{$asset->item->name}}">
-                                    </div>
-
-
-                                    <br/>
-
-                                    <div class="row" style="margin-left: 0%">
-                                        <label>Transfer Department</label>
-                                        <br/>
-
-                                        From &nbsp;
-
-                                        <input type="text" class="span6" name="pd" value="{{$asset->department->name}}" style="width: 20%" >
-
-                                        &nbsp; To &nbsp;
-
-
-                                            <select name="department_id">
-
-                                                <option value="{{$asset->department->id}}"></option>
-                                                    @foreach($department as $department)
-
-                                                    <option value="{{$department->id}}">{{$department->name}} </option>
-
-                                                @endforeach
-
-                                            </select>
-
-
-
-                                    </div>
-                                    <br/>
-
-                                    <div class="row" style="margin-left: 0%">
-                                        <label>Transfer user</label>
-                                        <br/>
-                                        From &nbsp;
-                                        <input type="text" class="span6" name="pu" value="{{$asset->asset_user}}" style="width: 20%" >
-
-                                        &nbsp; To &nbsp;
-
-                                        <input type="text" class="span6" name="asset_user" value="" style="width: 20%">
-
-
-                                    </div>
-
-                             <br/>
-
-                                   <div class="control-group">
-                                        <label class="control-label" for="name">Model</label>
-                                        <div class="controls">
-                                            <input type="text" class="span6" name="model" value="{{$asset->model}}" disabled>
-                                        </div> <!-- /controls -->
-                                    </div>
-
-                                    <br/>
-
-                                     <div class="control-group">
-                                        <label class="control-label" for="name">Serial number</label>
-                                        <div class="controls">
-                                            <input type="text" class="span6" name="serial_number" value="{{$asset->serial_number}}" disabled>
-                                        </div> <!-- /controls -->
-                                    </div>
-
-
-                                    <div class="form-actions">
-                                        <button type="submit" class="btn btn-primary">Transfer</button>
-                                        <button class="btn">Cancel</button>
-                                    </div>
-                                </fieldset>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <!-- Hero -->
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h3 my-2">
+                    Assets <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
+                        update asset here
+                    </small>
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item">User Interface</li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="">Update Asset</a>
+                        </li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
 
+    <!-- END Hero -->
+
+
+    <div class="content">
+        <!-- Form Wizards (.js-wizard-* classes are initialized in js/pages/be_forms_wizard.min.js which was auto compiled from _es6/pages/be_forms_wizard.js) -->
+        <!-- For more examples you can check out https://github.com/VinceG/twitter-bootstrap-wizard -->
+
+        <!-- Simple Wizards -->
+        <div class="col-md-8">
+            <!-- Progress Wizard 2 -->
+            <div class="js-wizard-simple block block">
+                <!-- Wizard Progress Bar -->
+                <div class="progress rounded-0" data-wizard="progress" style="height: 8px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <!-- END Wizard Progress Bar -->
+
+                <!-- Step Tabs -->
+                <ul class="nav nav-tabs nav-tabs-alt nav-justified" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#wizard-progress2-step1" data-toggle="tab">1.Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#wizard-progress2-step2" data-toggle="tab">2. Department & User</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#wizard-progress2-step3" data-toggle="tab">4. Identification</a>
+                    </li>
+
+                </ul>
+                <!-- END Step Tabs -->
+
+                <!-- Form -->
+                <form method="post" action="{{route('asset.update',$asset->sap_no)}}" >
+
+                {{ method_field('PUT') }}
+
+                {{csrf_field()}}
+
+                <!-- Steps Content -->
+                    <div class="block-content block-content-full tab-content px-md-5" style="min-height: 314px;">
+                        <!-- Step 1 -->
+                        <div class="tab-pane active" id="wizard-progress2-step1" role="tabpanel">
+                            <div class="form-group">
+                                <label for="wizard-progress2-firstname">Identification number</label>
+                                <input class="form-control form-control-alt" type="text" id="wizard-progress2-firstname" name="identification_no" value="{{$asset->identification_no}}" disabled>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="wizard-progress2-lastname">Asset sap number</label>
+                                <input class="form-control form-control-alt" type="text" id="wizard-progress2-lastname" name="sap_no" value="{{$asset->sap_no}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="wizard-progress2-lastname">Asset user</label>
+                                <input class="form-control form-control-alt" type="text" id="wizard-progress2-lastname" name="asset_user" value="{{$asset->asset_user}}" required>
+                            </div>
+
+                        </div>
+                        <!-- END Step 1 -->
+
+                        <!-- Step 2 -->
+                        <div class="tab-pane " id="wizard-progress2-step2" role="tabpanel">
+                            <div class="form-group">
+                                <label for="wizard-progress2-skills">Category</label>
+                                <select class="form-control form-control-alt" id="wizard-progress2-skills" name="item_id" required>
+                                    <option value="{{$asset->item->id}}">{{$asset->item->name}}</option>
+                                    @foreach($items as $item)
+
+                                        <option value="{{$item->id}}">{{$item->name}} </option>
+
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="form-group">
+
+                                <label for="wizard-progress2-skills">Department</label>
+                                <select class="form-control form-control-alt" id="wizard-progress2-skills" name="department_id">
+                                    <option value="{{$asset->department->id}}">{{$asset->department->name}}</option>
+                                    @foreach($departments as $department)
+
+                                        <option value="{{$department->id}}">{{$department->name}} </option>
+
+                                    @endforeach
+                                </select>
+                            </div>
+
+                        </div>
 
 
 
+                        <div class="tab-pane " id="wizard-progress2-step3" role="tabpanel">
+                            <div class="form-group">
+                                <label for="wizard-progress2-firstname">Model</label>
+                                <input class="form-control form-control-alt" type="text" id="wizard-progress2-firstname" name="model" value="{{$asset->model}}" required>
 
+                            </div>
+                            <div class="form-group">
+                                <label for="wizard-progress2-lastname">Serial Number</label>
+                                <input class="form-control form-control-alt" type="text" id="wizard-progress2-lastname" name="serial_number" value="{{$asset->serial_number}}" required>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                        <!-- END Step 3 -->
+
+                    <!-- END Steps Content -->
+
+                    <!-- Steps Navigation -->
+                    <div class="block-content block-content-sm block-content-full bg-body-light rounded-bottom">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-secondary" data-wizard="prev">
+                                    <i class="fa fa-angle-left mr-1"></i> Previous
+                                </button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button type="button" class="btn btn-secondary" data-wizard="next">
+                                    Next <i class="fa fa-angle-right ml-1"></i>
+                                </button>
+                                <button type="submit" class="btn btn-primary d-none" data-wizard="finish">
+                                    <i class="fa fa-check mr-1"></i> Update
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Steps Navigation -->
+                </form>
+                <!-- END Form -->
+            </div>
+
+
+</div>
+    </div>
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

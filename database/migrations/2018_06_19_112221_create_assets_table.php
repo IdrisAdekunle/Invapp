@@ -23,6 +23,7 @@ class CreateAssetsTable extends Migration
             $table->string('model');
             $table->string('serial_number');
             $table->boolean('scrap')->default(0);
+            $table->string('qrcode');
             $table->timestamps();
         });
     }

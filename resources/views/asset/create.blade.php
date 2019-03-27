@@ -3,22 +3,41 @@
 @section('content')
 
 @include('messages.error')
-    <div class="main-inner">
 
-        <div class="container">
+<div class="bg-body-light">
+    <div class="content content-full">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+            <h1 class="flex-sm-fill h3 my-2">
+                Assets <small class="d-block d-sm-inline-block mt-2 mt-sm-0 font-size-base font-w400 text-muted">
+                    Upload assets here
+                </small>
+            </h1>
+            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-alt">
+                    <li class="breadcrumb-item">User Interface</li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a class="link-fx" href="">Upload assets</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- END Hero -->
+
+<div class="content">
+    <div class="block">
+        <div class="block-content text-center">
+
 
             <div class="row">
+                <div class="col-lg-4">
 
-                <div class="span12">
+                </div>
+                <div class="">
 
-                    <div class="widget ">
-
-                        <div class="widget-header">
-                            <i class="icon-hdd"></i>
-                            <h3>Upload assets</h3>
-                        </div> <!-- /widget-header -->
-
-                        @include('messages.flash')
+                    @include('messages.flash')
 
                         <form  method="POST" action="{{ url('asset') }}">
 
@@ -31,6 +50,7 @@
                                     </tr>
 
          <br/>
+                                    <div class="col-md-3">
                                         <select class="form-control" id="exampleSelect1" name="item_id">
                                             <option>Choose Item  here</option>
                                             @foreach($items as $item)
@@ -41,10 +61,14 @@
 
                                         </select>
 
+                                    </div>
+
+
 
                                     <br/> <br/>
+                                    <div class="col-md-3">
 
-                                        <select class="form-control" id="exampleSelect1" name="department_id">
+                                    <select class="form-control" id="exampleSelect1" name="department_id">
                                             <option >Choose department here</option>
                                             @foreach($departments as $department)
 
@@ -55,7 +79,7 @@
                                         </select>
 
 
-
+                                  </div>
 
                                     <br/> <br/>
 
@@ -100,51 +124,14 @@
 
 
 
-
-                    </div>
-                </div>
+</div>
             </div>
         </div>
     </div>
+</div>
 
 
-    <script type="text/javascript">
-                            $(function()
-                            {
-                                $('#add').click(function()
-                                {
-                                    addnewrow();
-                                });
-                                $('body').delegate('.remove','click',function()
-                                {
-                                    $(this).parent().parent().remove();
 
-                                });
-
-                            });
-
-                                function addnewrow() {
-
-                                    var n = ($('.detail tr').length - 0) + 1;
-                                    var tr = '<tr>' +
-
-
-                                                '<td class="no">' + n + '</td>' +
-                                        '<td><input type="text" class="form-control " name="sap_no[]"   ></td>' +
-                                        '<td><input type="text" class="form-control " name="asset_user[]"   ></td>' +
-                                        '<td><input type="text" class="form-control " name="model[]"  ></td>' +
-                                        '<td><input type="text" class="form-control " name="serial_number[]"   ></td>' +
-
-                                        '<td><button type="button" name="remove" class="btn btn-danger btn-xs remove">X</button></td>' +
-                                        '</tr>';
-
-
-                                    $('.detail').append(tr);
-
-
-                            }
-
-                        </script>
 
 
 
